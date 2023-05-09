@@ -4,5 +4,5 @@ cmake .. -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" -DC
 if errorlevel 1 exit 1
 nmake
 if errorlevel 1 exit 1
-nmake install
+copy randSpg.exe %LIBRARY_PREFIX%\bin
 if errorlevel 1 exit 1
