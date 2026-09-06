@@ -1,0 +1,48 @@
+schema_version: 1
+
+context:
+  name: randSpg
+  version: "0.0.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/xtalopt/${{ name }}/archive/master.zip
+  sha256: 5dd5530c457e3d19233d9c2dc83cb4f373251d7d38dd68b70b1ddc2be8be8f05
+
+build:
+  number: 4
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - cmake
+    - make
+
+tests:
+  - files:
+      recipe:
+        - randSpg.in
+    script:
+      - if: unix
+        then: test -f $PREFIX/bin/randSpg
+      - if: unix
+        then: $PREFIX/bin/randSpg randSpg.in
+
+about:
+  license: BSD-3-Clause
+  license_file: COPYING
+  summary: RandSpg is a program that generates random crystals with specific space groups
+  description: |
+    The RandSpg algorithm is able to determine every possible combination
+    of Wyckoff positions for a given space group and composition.
+  homepage: https://github.com/xtalopt/randSpg
+  repository: https://github.com/xtalopt/randSpg
+  documentation: https://github.com/xtalopt/randSpg
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
